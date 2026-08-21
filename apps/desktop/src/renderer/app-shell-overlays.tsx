@@ -44,7 +44,13 @@ export function AppShellOverlays(props: {
   setUiLocalePreference: (preference: UiLocalePreference) => void;
   uiLocaleUpdateGate: UiLocaleUpdateGate;
   setUserLabel(userLabel: string): void;
-  setDefaultPermissionMode(mode: ChatDefaultPermissionMode): void;
+  /**
+   * Settings changed a chat default the composer also shows. The shell
+   * re-reads it from the Host rather than being handed the new value: the
+   * Host owns it, and a value passed along here would be a second copy that
+   * can disagree the moment anything else writes the setting.
+   */
+  refreshChatDefaults(): void;
   settingsRequestedSection: SettingsSection | undefined;
   settingsProviderCatalogOpen: boolean;
   settingsConnectionDetailSlug: string | undefined;
@@ -87,7 +93,7 @@ export function AppShellOverlays(props: {
     setUiLocalePreference,
     uiLocaleUpdateGate,
     setUserLabel,
-    setDefaultPermissionMode,
+    refreshChatDefaults,
     themePalette,
     themePref,
     onExternalSessionImported,
@@ -117,7 +123,7 @@ export function AppShellOverlays(props: {
             onUiLocalePreferenceChange={setUiLocalePreference}
             uiLocaleUpdateGate={uiLocaleUpdateGate}
             onUserLabelChange={setUserLabel}
-            onDefaultPermissionModeChange={setDefaultPermissionMode}
+            onDefaultPermissionModeChange={() => refreshChatDefaults()}
             requestedSection={settingsRequestedSection}
             openProviderCatalog={settingsProviderCatalogOpen}
             initialConnectionSlug={settingsConnectionDetailSlug}
