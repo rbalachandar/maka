@@ -3153,7 +3153,6 @@ describe('SessionManager child-session runtime primitive', () => {
               systemPrompt: LOCAL_READ_AGENT_DEFINITION.systemPrompt,
               toolNames: [...LOCAL_READ_AGENT_DEFINITION.tools],
               categoryPolicy: {},
-              permissionCeiling: 'ask',
             },
             subagentSpawn: {
               schemaVersion: 1,
@@ -3476,7 +3475,6 @@ describe('SessionManager child-session runtime primitive', () => {
           systemPrompt: LOCAL_READ_AGENT_DEFINITION.systemPrompt,
           toolNames: [...LOCAL_READ_AGENT_DEFINITION.tools],
           categoryPolicy: {},
-          permissionCeiling: 'ask',
         },
         subagentSpawn: {
           schemaVersion: 1,
@@ -3749,7 +3747,6 @@ describe('SessionManager child-session runtime primitive', () => {
           systemPrompt: LOCAL_READ_AGENT_DEFINITION.systemPrompt,
           toolNames: ['Read', 'Glob', 'Grep'],
           categoryPolicy: { read: 'allow' },
-          permissionCeiling: 'ask',
         },
         subagentSpawn: {
           schemaVersion: 1,
@@ -18358,7 +18355,6 @@ function createGraphOperatorSession(
         systemPrompt: LOCAL_READ_AGENT_DEFINITION.systemPrompt,
         toolNames: [...LOCAL_READ_AGENT_DEFINITION.tools],
         categoryPolicy: {},
-        permissionCeiling: 'ask',
       },
     }),
   );

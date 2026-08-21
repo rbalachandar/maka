@@ -3132,7 +3132,6 @@ describe('Maka Pi TUI runner', () => {
         agentName: 'Local Read',
         profile: 'local_read',
         toolNames: ['Read', 'Glob', 'Grep'],
-        permissionCeiling: 'ask' as const,
       },
     };
     const driver = new SlashCommandDriver([parent, child]);

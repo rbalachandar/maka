@@ -981,7 +981,6 @@ async function createClaimedGraphChild(input: {
       systemPrompt: LOCAL_READ_AGENT_DEFINITION.systemPrompt,
       toolNames: [...LOCAL_READ_AGENT_DEFINITION.tools],
       categoryPolicy: {},
-      permissionCeiling: 'ask',
     },
     subagentSpawn: {
       schemaVersion: 1,
