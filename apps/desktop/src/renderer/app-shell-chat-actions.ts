@@ -184,6 +184,12 @@ export function createAppShellChatActions(deps: {
    * `chatDefaults`; a value is a real per-Session override and is sent once.
    */
   newChatPermissionChoice: ChatDefaultPermissionMode | undefined;
+  /**
+   * Drops the draft's permission choice once it has reached a created Session.
+   * The choice is keyed by Host/project target rather than by draft, so
+   * without this the next task on the same target would silently re-send it.
+   */
+  clearNewChatPermissionChoice: () => void;
   newChatCollaborationMode: CollaborationMode;
   newChatOrchestrationMode: OrchestrationMode;
   newTaskTarget: DesktopNewTaskTarget | undefined;
@@ -216,6 +222,7 @@ export function createAppShellChatActions(deps: {
     newChatModel,
     pendingNewChatThinkingLevel,
     newChatPermissionChoice,
+    clearNewChatPermissionChoice,
     newChatCollaborationMode,
     newChatOrchestrationMode,
     newTaskTarget,
@@ -407,6 +414,9 @@ export function createAppShellChatActions(deps: {
           orchestrationMode: newChatOrchestrationMode,
         });
         unsentSessionId = session.id;
+        // Consumed: the choice is now the created Session's, not the next
+        // draft's. A failed create leaves it in place so a retry keeps it.
+        if (newChatPermissionChoice) clearNewChatPermissionChoice();
         upsertSessionSummary(session);
         optimisticSessionId = session.id;
         optimisticTurnId = turnId;
